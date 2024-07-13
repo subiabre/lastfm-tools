@@ -14,8 +14,16 @@ export class MusicbrainzService {
         }
 
         const data = await res.json();
-        
-        return data.artists[0];
+
+        for (let index = 0; index < data.artists.length; index++) {
+            const item = data.artists[index];
+            
+            if (item.name === "[no artist]") {
+                continue;
+            }
+
+            return item;
+        }
     }
 }
 
