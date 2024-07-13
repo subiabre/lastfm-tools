@@ -4,7 +4,7 @@ export class MusicbrainzService {
     public async getArtist(artist: string) {
         const params = new URLSearchParams({
             fmt: "json",
-            query: `artist=${artist}`
+            query: `artist:${artist}`
         });
 
         const res = await fetch(API_ADDR + "?" + params);
