@@ -9,7 +9,7 @@ export class ArtistService {
         this.lastfm = lastfm;
     }
 
-    public async getImage(artist: any) {
+    public async getImage(artist: any): Promise<string> {
         let mbid = artist.mbid;
         if (typeof mbid === "undefined") {
             const mbdata = await musicbrainz.getArtist(artist.name);
@@ -24,7 +24,7 @@ export class ArtistService {
         }
     }
 
-    public async getCorrection(artist: string) {
+    public async getCorrection(artist: string): Promise<string> {
         const data = await this.lastfm.fetch(new URLSearchParams({
             method: "artist.getCorrection",
             artist: artist

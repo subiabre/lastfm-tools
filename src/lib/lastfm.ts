@@ -1,4 +1,5 @@
 import { ArtistService } from "./service/artist";
+import { UserService } from "./service/user";
 
 const API_ADDR = "http://ws.audioscrobbler.com/2.0/";
 
@@ -14,6 +15,16 @@ export interface Track {
     title: string,
     playcount: number,
     listeners: number
+}
+
+export interface User {
+    name: string,
+    playcount: number,
+    artistcount: number,
+    trackcount: number,
+    albumcount: number,
+    url: string,
+    image: string
 }
 
 export class LastfmService {
@@ -34,5 +45,6 @@ export class LastfmService {
 }
 
 export const lastfm = {
-    artist: new ArtistService(new LastfmService)
+    artist: new ArtistService(new LastfmService),
+    user: new UserService(new LastfmService)
 };
