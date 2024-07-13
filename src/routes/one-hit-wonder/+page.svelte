@@ -10,11 +10,9 @@
     let topTracksPercentage: number | undefined;
 
     async function handleSubmit() {
-        const correctName = await lastfm.artist.getCorrection(artistName);
-
-        artist = await lastfm.artist.getInfo(correctName);
+        artist = await lastfm.artist.getInfoImproved(artistName);
         topTracks = await lastfm.artist.getTopTracks(
-            correctName,
+            artist.name,
             topTrackCount,
         );
 
@@ -42,6 +40,7 @@
 </form>
 
 {#if artist}
+    <img src={artist.image} alt={artist.name} />
     <p>
         {topTracksPercentage}% of {artist.name} listens are in their top {topTracks?.length}
         tracks.

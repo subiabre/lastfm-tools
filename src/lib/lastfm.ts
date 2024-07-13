@@ -5,7 +5,9 @@ const API_ADDR = "http://ws.audioscrobbler.com/2.0/";
 export interface Artist {
     name: string,
     playcount: number,
-    listeners: number
+    listeners: number,
+    image: string,
+    url: string
 }
 
 export interface Track {
