@@ -1,6 +1,7 @@
 <script lang="ts">
     import { lastfm, type Artist, type Track } from "$lib/lastfm";
     import { calcPlaycount } from "$lib/stats";
+    import ArtistThumb from "$lib/ui/ArtistThumb.svelte";
 
     let artistName: string;
     let topTrackCount: string;
@@ -34,15 +35,20 @@
         <option value="10">Top 10 tracks</option>
         <option value="20">Top 20 tracks</option>
         <option value="30">Top 30 tracks</option>
-        <option value="30">Top 50 tracks</option>
+        <option value="50">Top 50 tracks</option>
     </select>
     <button type="submit">Submit</button>
 </form>
 
 {#if artist}
-    <img src={artist.image} alt={artist.name} />
-    <p>
-        {topTracksPercentage}% of {artist.name} listens are in their top {topTracks?.length}
-        tracks.
-    </p>
+    <ArtistThumb {artist}>
+        <p>
+            <strong>{topTracksPercentage}%</strong> of {artist.name} listens are
+            among their
+            <strong
+                >top {topTracks?.length}
+                tracks</strong
+            >.
+        </p>
+    </ArtistThumb>
 {/if}
