@@ -1,8 +1,6 @@
 <script lang="ts">
     import { lastfm, type Artist, type ArtistTopTrack } from "$lib/lastfm";
-    import Percentage from "../../lib/ui/Percentage.svelte";
     import TrackRow from "./TrackRow.svelte";
-    import TrackTitle from "./TrackTitle.svelte";
 
     let artistName: string;
     let topTrackCount: string;
@@ -52,6 +50,18 @@
 {/if}
 
 <style>
+    input {
+        width: 100%;
+        padding: 1rem;
+
+        border: 1px solid #ebebeb;
+        border-radius: 0;
+    }
+
+    select {
+        margin: 1rem;
+    }
+
     table {
         width: 100%;
 
