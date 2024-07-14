@@ -1,30 +1,27 @@
 <script lang="ts">
-    import { lastfm, type Artist, type Track } from "$lib/lastfm";
-    import { calcPlaycount } from "$lib/stats";
-    import ArtistThumb from "$lib/ui/ArtistThumb.svelte";
+    import { lastfm, type Artist, type ArtistTopTrack } from "$lib/lastfm";
+    import Percentage from "../../lib/ui/Percentage.svelte";
+    import TrackRow from "./TrackRow.svelte";
+    import TrackTitle from "./TrackTitle.svelte";
 
     let artistName: string;
     let topTrackCount: string;
 
-    let artist: Artist | undefined;
-    let topTracks: Track[] | undefined;
-    let topTracksPercentage: number | undefined;
+    let data:
+        | Promise<{ artist: Artist; topTracks: ArtistTopTrack[] }>
+        | undefined;
 
     async function handleSubmit() {
-        artist = await lastfm.artist.getInfoImproved(artistName);
-        topTracks = await lastfm.artist.getTopTracks(
-            artist.name,
-            topTrackCount,
-        );
+        const correctName = await lastfm.artist.getCorrection(artistName);
 
-        topTracksPercentage = calcPlaycountPercentage(
-            calcPlaycount(topTracks),
-            artist.playcount,
-        );
+        data = getData(correctName);
     }
 
-    function calcPlaycountPercentage(playcount: number, total: number) {
-        return Math.round((playcount * 100) / total);
+    async function getData(name: string) {
+        const artist = await lastfm.artist.getInfo(name);
+        const topTracks = await lastfm.artist.getTopTracks(name, topTrackCount);
+
+        return { artist, topTracks };
     }
 </script>
 
@@ -40,15 +37,24 @@
     <button type="submit">Submit</button>
 </form>
 
-{#if artist}
-    <ArtistThumb {artist}>
-        <p>
-            <strong>{topTracksPercentage}%</strong> of {artist.name} listens are
-            among their
-            <strong
-                >top {topTracks?.length}
-                tracks</strong
-            >.
-        </p>
-    </ArtistThumb>
+{#if typeof data !== "undefined"}
+    {#await data}
+        <p>Loading</p>
+    {:then data}
+        <table>
+            {#each data.topTracks as topTrack}
+                <TrackRow track={topTrack} artist={data.artist} />
+            {/each}
+        </table>
+    {/await}
+{:else}
+    <p>No artist</p>
 {/if}
+
+<style>
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+    }
+</style>
