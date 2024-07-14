@@ -2,9 +2,9 @@ export function calcPlaycount(items: { playcount: number }[]) {
     let playcount = 0;
 
     for (let index = 0; index < items.length; index++) {
-        const artist = items[index];
+        const item = items[index];
 
-        playcount = playcount + artist.playcount;
+        playcount = playcount + item.playcount;
     }
 
     return playcount;
