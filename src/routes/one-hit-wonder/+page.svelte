@@ -1,13 +1,22 @@
 <script lang="ts">
     import { lastfm, type Artist, type ArtistTopTrack } from "$lib/lastfm";
+    import { calcPlaycount } from "$lib/stats";
+    import Percentage from "$lib/ui/Percentage.svelte";
     import TrackRow from "./TrackRow.svelte";
+    import { getRandomExample } from "./examples";
+
+    const example = getRandomExample();
 
     let artistName: string;
     let topTrackCount: string;
 
-    let data:
-        | Promise<{ artist: Artist; topTracks: ArtistTopTrack[] }>
-        | undefined;
+    interface OneHitWonderData {
+        artist: Artist;
+        topTracks: ArtistTopTrack[];
+        topTracksPlaycount: number;
+    }
+
+    let data: Promise<OneHitWonderData> | undefined;
 
     async function handleSubmit() {
         const correctName = await lastfm.artist.getCorrection(artistName);
@@ -19,7 +28,11 @@
         const artist = await lastfm.artist.getInfo(name);
         const topTracks = await lastfm.artist.getTopTracks(name, topTrackCount);
 
-        return { artist, topTracks };
+        return {
+            artist,
+            topTracks,
+            topTracksPlaycount: calcPlaycount(topTracks),
+        };
     }
 </script>
 
@@ -39,6 +52,12 @@
     {#await data}
         <p>Loading</p>
     {:then data}
+        <p>
+            {data.artist.name}'s top {data.topTracks.length} has <Percentage
+                part={data.topTracksPlaycount}
+                total={data.artist.playcount}
+            /> of their total plays.
+        </p>
         <table>
             {#each data.topTracks as topTrack}
                 <TrackRow track={topTrack} artist={data.artist} />
@@ -46,7 +65,17 @@
         </table>
     {/await}
 {:else}
-    <p>No artist</p>
+    <p>
+        <a href="https://en.wikipedia.org/wiki/One-hit_wonder">One-hit wonder</a
+        > calculator.
+    </p>
+    <p>
+        Use this tool to analyze how much weight does an artist's top tracks
+        hold against their total plays and listener counts. e.g: <button
+            type="button"
+            on:click={() => (data = getData(example))}>{example}</button
+        >
+    </p>
 {/if}
 
 <style>
@@ -58,8 +87,21 @@
         border-radius: 0;
     }
 
+    p {
+        margin: 1rem;
+    }
+
     select {
         margin: 1rem;
+    }
+
+    button.example {
+        border: none;
+
+        font-size: inherit;
+        font-family: inherit;
+
+        background-color: transparent;
     }
 
     table {
