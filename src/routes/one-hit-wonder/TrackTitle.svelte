@@ -6,8 +6,9 @@
 
 <style>
     span {
+        max-width: 80vw;
+
         display: inline-block;
-        max-width: 30ch;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

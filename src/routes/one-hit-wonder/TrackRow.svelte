@@ -10,7 +10,7 @@
 
 <tr>
     <td>
-        #{track.rank}
+        <p>#{track.rank}</p>
     </td>
     <td>
         <p><TrackTitle {track} /></p>
@@ -37,13 +37,13 @@
     }
 
     td {
-        padding: 1rem 0;
+        padding: 1rem 1rem 1rem 0;
 
         vertical-align: top;
     }
 
     td:first-child {
-        text-align: center;
+        padding: 1rem 0 1rem 1rem;
     }
 
     p {
