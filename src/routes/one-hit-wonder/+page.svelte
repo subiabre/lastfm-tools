@@ -36,6 +36,9 @@
     }
 </script>
 
+<svelte:head>
+    <title>One-hit wonder calculator | Last.fm Tools</title>
+</svelte:head>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Artist name" bind:value={artistName} />
     <select bind:value={topTrackCount}>
