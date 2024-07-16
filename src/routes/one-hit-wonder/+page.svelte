@@ -95,15 +95,6 @@
         margin: 1rem;
     }
 
-    button.example {
-        border: none;
-
-        font-size: inherit;
-        font-family: inherit;
-
-        background-color: transparent;
-    }
-
     table {
         width: 100%;
 
