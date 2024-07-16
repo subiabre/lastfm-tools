@@ -40,7 +40,7 @@
 </script>
 
 <div style="--bar-size: {barSize}%; --bar-color: {barColor}">
-    <Percentage {total} {part} />% {text}
+    <Percentage {total} {part} /> {text}
 </div>
 
 <style>
