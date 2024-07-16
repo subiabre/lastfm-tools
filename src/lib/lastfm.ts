@@ -1,6 +1,6 @@
 import { ArtistService } from "./service/artist";
 
-const API_ADDR = "http://ws.audioscrobbler.com/2.0/";
+const API_ADDR = "https://ws.audioscrobbler.com/2.0/";
 
 export class LastfmService {
     public async fetch(params: URLSearchParams) {
