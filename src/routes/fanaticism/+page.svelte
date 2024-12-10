@@ -23,17 +23,18 @@
     <button type="submit">Add artist</button>
 </form>
 
+<p>Fanaticism.</p>
+<p>
+    Use this tool to analyze how much fanaticism an artist has. i.e: how much it
+    gets listened to, on average, by each listener.
+</p>
+
 {#if artists.length > 0}
     <Table>
         {#each artists as artist}
             <ArtistRow {artist} />
         {/each}
     </Table>
-{:else}
-    <p>Fanaticism.</p>
-    <p>
-        Use this tool to analyze how much fanaticism an artist has. i.e: how much it gets listened to, on average, by each listener.
-    </p>
 {/if}
 
 <style>

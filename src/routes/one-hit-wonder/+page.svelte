@@ -52,6 +52,17 @@
     <button type="submit">Submit</button>
 </form>
 
+<p>
+    <a href="https://en.wikipedia.org/wiki/One-hit_wonder">One-hit wonder</a> calculator.
+</p>
+<p>
+    Use this tool to analyze how much weight does an artist's top tracks hold
+    against their total plays and listener counts. e.g: <button
+        type="button"
+        on:click={() => (data = getData(example))}>{example}</button
+    >
+</p>
+
 {#if typeof data !== "undefined"}
     {#await data}
         <p>Loading</p>
@@ -68,18 +79,6 @@
             {/each}
         </Table>
     {/await}
-{:else}
-    <p>
-        <a href="https://en.wikipedia.org/wiki/One-hit_wonder">One-hit wonder</a
-        > calculator.
-    </p>
-    <p>
-        Use this tool to analyze how much weight does an artist's top tracks
-        hold against their total plays and listener counts. e.g: <button
-            type="button"
-            on:click={() => (data = getData(example))}>{example}</button
-        >
-    </p>
 {/if}
 
 <style>
