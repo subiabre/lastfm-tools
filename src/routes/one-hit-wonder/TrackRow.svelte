@@ -10,10 +10,7 @@
 
 <TableRow>
     <td>
-        <p>#{track.rank}</p>
-    </td>
-    <td>
-        <p><TableRowTitle title={track.title} /></p>
+        <p><TableRowTitle title="#{track.rank} — {track.title}" /></p>
         <p>
             <TrackBar
                 part={track.listeners}
