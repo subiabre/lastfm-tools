@@ -14,6 +14,7 @@
 </p>
 <a href="{base}/one-hit-wonder"><h2>One-hit wonder calculator</h2></a>
 <a href="{base}/fanaticism"><h2>Fanaticism calculator</h2></a>
+<a href="{base}/line-up"><h2>Line-up composer</h2></a>
 
 <style>
     h1, h2 {
