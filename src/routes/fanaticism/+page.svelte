@@ -16,14 +16,14 @@
 </script>
 
 <svelte:head>
-    <title>Fanaticism | Last.fm Tools</title>
+    <title>Fanaticism calculator | Last.fm Tools</title>
 </svelte:head>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Artist name" bind:value={artistName} />
     <button type="submit">Add artist</button>
 </form>
 
-<p>Fanaticism.</p>
+<p>Fanaticism calculator.</p>
 <p>
     Use this tool to analyze how much fanaticism an artist has. i.e: how much it
     gets listened to, on average, by each listener.
