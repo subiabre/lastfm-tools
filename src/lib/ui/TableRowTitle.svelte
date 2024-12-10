@@ -1,8 +1,10 @@
 <script lang="ts">
-    export let track: { title: string };
+    export let title: string;
 </script>
 
-<span title={track.title}>{track.title}</span>
+<span {title}>
+    {title}
+</span>
 
 <style>
     span {

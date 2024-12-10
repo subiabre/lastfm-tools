@@ -1,8 +1,8 @@
 <script lang="ts">
     import type { Artist, ArtistTopTrack } from "$lib/lastfm";
     import TableRow from "$lib/ui/TableRow.svelte";
+    import TableRowTitle from "$lib/ui/TableRowTitle.svelte";
     import TrackBar from "./TrackBar.svelte";
-    import TrackTitle from "./TrackTitle.svelte";
 
     export let track: ArtistTopTrack;
     export let artist: Artist;
@@ -13,7 +13,7 @@
         <p>#{track.rank}</p>
     </td>
     <td>
-        <p><TrackTitle {track} /></p>
+        <p><TableRowTitle title={track.title} /></p>
         <p>
             <TrackBar
                 part={track.listeners}
