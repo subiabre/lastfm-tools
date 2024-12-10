@@ -8,9 +8,9 @@
     const c6080 = "#fe610080";
     const c8000 = "#ffb00080";
 
-    let color: string = getColor();
+    $: color = getColor(size);
 
-    function getColor() {
+    function getColor(size: number) {
         if (size > 80) {
             return c8000;
         }
