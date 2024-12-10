@@ -2,6 +2,7 @@
     import { lastfm, type Artist, type ArtistTopTrack } from "$lib/lastfm";
     import { calcPlaycount } from "$lib/stats";
     import Percentage from "$lib/ui/Percentage.svelte";
+    import Table from "$lib/ui/Table.svelte";
     import TrackRow from "./TrackRow.svelte";
     import { getRandomExample } from "./examples";
 
@@ -61,11 +62,11 @@
                 total={data.artist.playcount}
             /> of their total plays.
         </p>
-        <table>
+        <Table>
             {#each data.topTracks as topTrack}
                 <TrackRow track={topTrack} artist={data.artist} />
             {/each}
-        </table>
+        </Table>
     {/await}
 {:else}
     <p>
@@ -96,11 +97,5 @@
 
     select {
         margin: 1rem;
-    }
-
-    table {
-        width: 100%;
-
-        border-collapse: collapse;
     }
 </style>
