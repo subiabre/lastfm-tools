@@ -16,7 +16,7 @@
         <p><TableRowTitle title={artist.name} /></p>
         <p>
             <GraphBar size={barSize}>
-                <Percentage part={artist.listeners} total={totalListeners} /> of attendees
+                <Percentage part={artist.listeners} total={totalListeners} /> of total listeners
             </GraphBar>
         </p>
     </td>
@@ -24,13 +24,9 @@
 
 <style>
     td {
-        padding: 1rem 1rem 1rem 0;
+        padding: 1rem;
 
         vertical-align: top;
-    }
-
-    td:first-child {
-        padding: 1rem 0 1rem 1rem;
     }
 
     p {

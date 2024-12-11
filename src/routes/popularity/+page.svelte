@@ -2,7 +2,7 @@
     import { lastfm, type Artist } from "$lib/lastfm";
     import BigNumber from "$lib/ui/BigNumber.svelte";
     import Table from "$lib/ui/Table.svelte";
-    import LineupRow from "./LineupRow.svelte";
+    import PopularityRow from "./PopularityRow.svelte";
 
     let artistName: string;
 
@@ -31,28 +31,26 @@
 </script>
 
 <svelte:head>
-    <title>Line-up composer | Last.fm Tools</title>
+    <title>Popularity contest | Last.fm Tools</title>
 </svelte:head>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Artist name" bind:value={artistName} />
     <button type="submit">Add artist</button>
 </form>
 
-<p>Line-up composer.</p>
+<p>Popularity contest.</p>
 <p>
-    If you were to decide the line-up of a festival, this is how much calling
-    each artist would have.
+    Check how much more or less popular are certain artists relative to others.
 </p>
 
 {#if lineup.artists.length > 0}
     <p>
-        This line-up could add up to <BigNumber
-            number={lineup.totalListeners}
-        /> total attendees.
+        The selected artists have a combined total of
+        <BigNumber number={lineup.totalListeners} /> listeners.
     </p>
     <Table>
         {#each lineup.artists as artist}
-            <LineupRow {artist} totalListeners={lineup.totalListeners} />
+            <PopularityRow {artist} totalListeners={lineup.totalListeners} />
         {/each}
     </Table>
 {/if}
