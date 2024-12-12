@@ -1,29 +1,24 @@
 <script lang="ts">
     import type { Artist, ArtistTopTrack } from "$lib/lastfm";
+    import GraphBar from "$lib/ui/GraphBar.svelte";
+    import Percentage from "$lib/ui/Percentage.svelte";
     import TableRow from "$lib/ui/TableRow.svelte";
     import TableRowTitle from "$lib/ui/TableRowTitle.svelte";
-    import TrackBar from "./TrackBar.svelte";
 
     export let track: ArtistTopTrack;
     export let artist: Artist;
+
+    $: barSize = Math.round((track.playcount * 100) / artist.playcount);
 </script>
 
 <TableRow>
     <td>
         <p><TableRowTitle title="#{track.rank} — {track.title}" /></p>
         <p>
-            <TrackBar
-                part={track.listeners}
-                total={artist.listeners}
-                text="of listeners"
-            />
-        </p>
-        <p>
-            <TrackBar
-                part={track.playcount}
-                total={artist.playcount}
-                text="of plays"
-            />
+            <GraphBar size={barSize}>
+                <Percentage total={artist.playcount} part={track.playcount} />
+                of plays
+            </GraphBar>
         </p>
     </td>
 </TableRow>
