@@ -17,7 +17,8 @@
     };
 
     async function handleSubmit() {
-        const artist = await lastfm.artist.getInfo(artistName);
+        const correctName = await lastfm.artist.getCorrection(artistName);
+        const artist = await lastfm.artist.getInfo(correctName);
 
         lineup = {
             artists: [...lineup.artists, artist],
